@@ -34,6 +34,6 @@
 
 ## Docker
 
-````bash
+```bash
 docker compose up -d
 ```
