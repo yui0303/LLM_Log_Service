@@ -1,12 +1,14 @@
 # LLM Log Service
 
-## Create Environments
+## Create Environments (for dev)
+
+1. set the .env from the .env.example
+    - set `MONGO_HOST` to localhost
 
 ### MongoDB Service
 
-1. set the .env from the .env.example
+1. remove the backend in docker compose file
     ```bash
-    cd database
     docker compose up -d
     ```
 
@@ -29,3 +31,9 @@
     ```bash
     fastapi dev main.py
     ```
+
+## Docker
+
+````bash
+docker compose up -d
+```
