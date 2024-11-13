@@ -1,7 +1,15 @@
-# Use root/example as user/password credentials
-version: '3.1'
-
 services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_HOST: mongo
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_USER: ${MONGO_USER}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo
@@ -11,6 +19,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - ./mongo_data:/data/db  # Persist MongoDB data
 
   mongo-express:
     image: mongo-express
@@ -23,3 +33,5 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/
       ME_CONFIG_BASICAUTH: false
 
+volumes:
+  mongo_data:
